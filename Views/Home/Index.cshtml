@@ -1,0 +1,64 @@
+﻿@model CvViewModel
+
+<!DOCTYPE html>
+
+<h1>@Model.Name</h1>
+<p>@Model.Title | <a href="mailto:@Model.Email">@Model.Email</a> | <a href="https://@Model.LinkedIn">@Model.LinkedIn</a></p>
+
+<h2>Summary</h2>
+<p>@Model.Summary</p>
+
+<h2>Skills</h2>
+<div class="skills-section">
+    <div class="skills-category">
+        <h3>Programming & Frameworks</h3>
+        @foreach (var skill in Model.ProgrammingSkills)
+        {
+            <div class="skill-row">
+                <span class="skill-name">@skill.Name</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:@skill.Level%"></div>
+                </div>
+                <span class="skill-level">@skill.Level%</span>
+            </div>
+        }
+    </div>
+    <!-- Repeat for DatabaseSkills and ToolSkills -->
+</div>
+<!-- Repeat for other skill categories -->
+
+<h2>Work Experience</h2>
+@foreach (var job in Model.WorkExperiences)
+{
+    <div>
+        <strong>@job.Company</strong> - @job.Period
+        <ul class="prevent-word-break">
+            @foreach (var resp in job.Responsibilities)
+            {
+                <li>@resp</li>
+            }
+        </ul>
+    </div>
+}
+<!-- Repeat for projects and education -->
+<h2>Projects</h2>
+@foreach (var job in Model.Projects)
+{
+    <div>
+        <strong>@job.Name</strong> - @job.Period
+        <ul class="prevent-word-break">
+            @foreach (var resp in job.Details)
+            {
+                <li>@resp</li>
+            }
+        </ul>
+    </div>
+}
+
+<h2>Education</h2>
+@foreach (var job in Model.Educations)
+{
+    <div>
+        <strong>@job.Institution</strong> - @job.Period
+    </div>
+}
